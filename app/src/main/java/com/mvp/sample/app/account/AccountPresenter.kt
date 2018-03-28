@@ -20,7 +20,6 @@ class AccountPresenter : AccountContract.Presenter() {
 
             override fun onStart() {
                 super.onStart()
-                Log.e("com.mvp.sample.app", "onStart()")
                 mLoading.showDialog(activity, "load")
             }
 
