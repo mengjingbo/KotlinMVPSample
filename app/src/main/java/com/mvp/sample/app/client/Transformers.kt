@@ -14,9 +14,7 @@ object Transformers {
     fun <T> transformer(): Observable.Transformer<T, T> {
         return Observable.Transformer { observable -> observable
                 .subscribeOn(Schedulers.io())
-                .observeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
-                .subscribeOn(AndroidSchedulers.mainThread())
                 .observeOn(AndroidSchedulers.mainThread())
         }
     }

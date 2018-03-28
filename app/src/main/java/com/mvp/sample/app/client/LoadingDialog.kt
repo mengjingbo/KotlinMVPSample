@@ -12,14 +12,13 @@ import com.mvp.sample.app.base.BaseDialog
  */
 class LoadingDialog : BaseDialog() {
 
-    override val layoutId: Int
-        get() = R.layout.dialog_loading
-
-    override fun initView(view: View) {
-        setCanceledOnTouchOutside(false)
+    override fun layoutResId(): Int {
+        return R.layout.dialog_loading
     }
 
-    override fun loadData(bundle: Bundle) {
+    override fun initView(view: View?) {
+    }
 
+    override fun loadData(bundle: Bundle?) {
     }
 }

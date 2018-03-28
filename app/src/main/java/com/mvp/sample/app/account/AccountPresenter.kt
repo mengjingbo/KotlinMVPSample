@@ -1,8 +1,7 @@
 package com.mvp.sample.app.account
 
 import android.app.Activity
-import android.arch.lifecycle.Lifecycle
-import android.arch.lifecycle.OnLifecycleEvent
+import android.util.Log
 import com.mvp.sample.app.bean.AccountBean
 import com.mvp.sample.app.client.LoadingDialog
 import rx.Subscriber
@@ -14,19 +13,15 @@ import rx.Subscriber
  */
 class AccountPresenter : AccountContract.Presenter() {
 
-    private lateinit var mLoading: LoadingDialog
-
-    @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
-    private fun onCreate(){
-        mLoading = LoadingDialog()
-    }
+    private val mLoading: LoadingDialog = LoadingDialog()
 
     override fun getAccount(activity: Activity, name: String) {
         mModel?.getAccount(name)?.subscribe(object : Subscriber<AccountBean>() {
 
             override fun onStart() {
                 super.onStart()
-                mLoading?.show(activity, "loadingAccount")
+                Log.e("com.mvp.sample.app", "onStart()")
+                mLoading.showDialog(activity, "load")
             }
 
             override fun onNext(t: AccountBean?) {
@@ -40,11 +35,11 @@ class AccountPresenter : AccountContract.Presenter() {
             }
 
             override fun onCompleted() {
-                mLoading?.dismiss()
+                mLoading.dismiss()
             }
 
             override fun onError(e: Throwable?) {
-                mLoading?.dismiss()
+                mLoading.dismiss()
                 if (e?.message?.isNotEmpty()!!) mView?.onMessage(e.message!!)
             }
         })
