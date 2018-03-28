@@ -5,11 +5,10 @@ import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.OnLifecycleEvent
 import com.mvp.sample.app.bean.AccountBean
 import com.mvp.sample.app.client.LoadingDialog
-import rx.Observable
 import rx.Subscriber
 
 /**
- * 作者：蒙景博
+ * 作者：秦川小将
  * 时间：2018/3/27
  * 描述：
  */

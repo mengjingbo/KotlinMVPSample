@@ -11,7 +11,7 @@ import android.widget.LinearLayout
 import com.mvp.sample.app.R
 
 /**
- * 作者：蒙景博
+ * 作者：秦川小将
  * 时间：2017/5/18
  * 描述：基类Dialog
  */
@@ -200,8 +200,8 @@ abstract class BaseDialog : DialogFragment() {
             //为了不重复显示dialog，在显示对话框之前移除正在显示的对话框
             mTransaction?.remove(mFragment)
         }
-        if (bundle != null && mFragment != null) {
-            mFragment.arguments = bundle
+        if (bundle != null) {
+            arguments = bundle
         }
         show(mTransaction, tag)
     }

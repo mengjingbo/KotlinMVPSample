@@ -5,7 +5,7 @@ import android.arch.lifecycle.LifecycleObserver
 import android.arch.lifecycle.OnLifecycleEvent
 
 /**
- * 作者：蒙景博
+ * 作者：秦川小将
  * 时间：2018/3/27
  * 描述：
  */

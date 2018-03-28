@@ -11,7 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 /**
- * 作者：蒙景博
+ * 作者：秦川小将
  * 时间：2018/3/28
  * 描述：
  */

@@ -7,6 +7,11 @@ import com.mvp.sample.app.R
 import com.mvp.sample.app.bean.AccountBean
 import kotlinx.android.synthetic.main.activity_main.*
 
+/**
+ * 作者：秦川小将
+ * 时间：2018/3/27
+ * 描述：账户
+ */
 class AccountActivity : AppCompatActivity(), AccountContract.View {
 
     private var mPresenter = AccountPresenter()
