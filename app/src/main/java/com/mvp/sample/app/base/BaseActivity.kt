@@ -69,7 +69,7 @@ abstract class BaseActivity : AppCompatActivity() {
     }
 
     /**
-     * 添加android.support.v4.app.Fragment方便与ViewPager使用
+     * 添加android.support.v4.app包下的Fragment，方便与ViewPager使用
      */
     open fun addFragment(resId: Int, fragment: Fragment?) {
         if (resId == 0 || (fragment == null || !fragment.isAdded)) return

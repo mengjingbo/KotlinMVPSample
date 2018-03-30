@@ -35,7 +35,7 @@ abstract class BaseDialog : DialogFragment() {
         if (mView == null) {
             mView = inflater?.inflate(layoutResId(), container, false)
         } else {
-            val mViewGroup: ViewGroup = mView.parent as ViewGroup
+            var mViewGroup: ViewGroup = mView.parent as ViewGroup
             if (mViewGroup.childCount > 0) {
                 mViewGroup.removeView(mView)
             }

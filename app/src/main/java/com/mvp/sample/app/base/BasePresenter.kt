@@ -20,10 +20,10 @@ abstract class BasePresenter<V : BaseView, M : BaseModel> : LifecycleObserver {
     }
 
     /**
-     * 当页面销毁时，这里利用生命周期组件对资源进行释放
+     * 当页面销毁时，这里利用生命周期组件优势对引用资源进行释放
      */
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
-    private fun onDestroy() {
+    open fun onCleared() {
         if (mView != null) mView = null
         if (mModel != null) mModel = null
     }

@@ -11,9 +11,10 @@ import kotlinx.android.synthetic.main.activity_main.*
  * 描述：GitHub账户
  */
 class AccountActivity : BaseActivity(), AccountContract.View {
-    private var mPresenter = AccountPresenter()
 
+    private var mPresenter = AccountPresenter()
     private var mModel = AccountModel()
+
     override val layoutResId: Int
         get() = R.layout.activity_main
 
