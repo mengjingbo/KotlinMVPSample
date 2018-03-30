@@ -1,14 +1,11 @@
 package com.mvp.sample.app.client
 
 import com.mvp.sample.app.BuildConfig
+import com.mvp.sample.app.bean.AccountBean
 import com.mvp.sample.app.service.Action
 import com.mvp.sample.app.service.GitHubService
-import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Retrofit
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
-import retrofit2.converter.gson.GsonConverterFactory
-import java.util.concurrent.TimeUnit
+import rx.Observable
 
 /**
  * 作者：秦川小将
@@ -17,13 +14,12 @@ import java.util.concurrent.TimeUnit
  */
 class RetrofitClient private constructor() {
 
-    private val mRetrofit: Retrofit
-    private val mService: GitHubService
-    private val mTimeout: Long = 60
+    var mClientHelper: ClientHelper = ClientHelper().baseUrl(Action.API)
 
     init {
-        mRetrofit = retrofit
-        mService = mRetrofit.create(GitHubService::class.java)
+        if (BuildConfig.DEBUG) {
+            mClientHelper.interceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+        }
     }
 
     companion object {
@@ -44,42 +40,9 @@ class RetrofitClient private constructor() {
     }
 
     /**
-     * 初始化Retrofit
+     * 获取账户信息
      */
-    private val retrofit: Retrofit
-        get() = Retrofit.Builder()
-                .baseUrl(Action.API)
-                .client(getClient)
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .build()
-
-    /**
-     * 初始化OkHttpClient
-     */
-    private val getClient: OkHttpClient
-        get() = OkHttpClient.Builder()
-                .connectTimeout(mTimeout, TimeUnit.SECONDS)
-                .writeTimeout(mTimeout, TimeUnit.SECONDS)
-                .readTimeout(mTimeout, TimeUnit.SECONDS)
-                .addInterceptor(getLogInterceptor)
-                .build()
-
-    /**
-     * 初始化HttpLoggingInterceptor
-     */
-    private val getLogInterceptor: HttpLoggingInterceptor
-        get() {
-            val mLogInterceptor = HttpLoggingInterceptor()
-            if(BuildConfig.DEBUG){
-                mLogInterceptor.level = HttpLoggingInterceptor.Level.BODY
-            }
-            return mLogInterceptor
-        }
-
-    /**
-     * 返回一个Service拱外部使用
-     */
-    val service:GitHubService
-        get() = mService
+    fun getAccount(name: String): Observable<AccountBean> {
+        return mClientHelper.create(GitHubService::class.java).getAccount(name).compose(Transformers.transformer())
+    }
 }

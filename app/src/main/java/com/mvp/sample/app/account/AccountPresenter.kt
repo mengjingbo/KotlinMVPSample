@@ -1,7 +1,6 @@
 package com.mvp.sample.app.account
 
 import android.app.Activity
-import android.util.Log
 import com.mvp.sample.app.bean.AccountBean
 import com.mvp.sample.app.client.LoadingDialog
 import rx.Subscriber
